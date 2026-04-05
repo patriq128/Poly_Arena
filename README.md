@@ -1,4 +1,4 @@
-# POLY⚡ARENA
+# POLY ARENA
 
 > **Vibe coded with Claude.** 10 AIs debate Polymarket prediction markets in your terminal — live graphs, save/load, and post-debate chat included.
 
@@ -15,7 +15,6 @@
 [![Groq](https://img.shields.io/badge/AI-Groq%20%2B%20Llama%203.3%2070B-orange?logo=meta)](https://console.groq.com)
 [![Polymarket](https://img.shields.io/badge/Data-Polymarket%20API-purple)](https://polymarket.com)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Vibe Coded](https://img.shields.io/badge/vibe%20coded-with%20Claude-00ff88)](https://claude.ai)
 
 ---
 
