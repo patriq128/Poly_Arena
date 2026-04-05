@@ -1,6 +1,6 @@
-# POLY ARENA
+# POLY⚡ARENA v2
 
-> 10 AIs debate Polymarket prediction markets in your terminal — live graphs, save/load, and post-debate chat included.
+> **Vibe coded with Claude.** An advanced multi-agent AI debate system for Polymarket prediction markets — structured outputs, meta-agent judge, disagreement heatmap, track record system, and post-debate chat. Powered by Groq (free).
 
 ```
   ██████╗  ██████╗ ██╗  ██╗   ██╗     █████╗ ██████╗ ███████╗███╗   ██╗ █████╗
@@ -12,64 +12,39 @@
 ```
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python&logoColor=white)](https://python.org)
-[![Groq](https://img.shields.io/badge/AI-Groq%20%2B%20Llama%203.3%2070B-orange?logo=meta)](https://console.groq.com)
+[![Groq](https://img.shields.io/badge/AI-Groq%20%2B%20Llama%203.3%2070B-orange)](https://console.groq.com)
 [![Polymarket](https://img.shields.io/badge/Data-Polymarket%20API-purple)](https://polymarket.com)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Vibe Coded](https://img.shields.io/badge/vibe%20coded-with%20Claude-00ff88)](https://claude.ai)
 
 ---
 
 ## What is this?
 
-PolyArena is a terminal app that pits **10 AI agents** against each other in structured debates about [Polymarket](https://polymarket.com) prediction markets. You pick a market — paste a URL, browse trending, or load a saved one — and watch 10 differently-opinionated AIs argue YES or NO across 3 rounds, reading each other's arguments before each vote.
+PolyArena v2 is a fully modular multi-agent debate system that pits **10 AI agents** against each other in structured, 3-round debates about [Polymarket](https://polymarket.com) prediction markets.
 
-After the debate you get:
-- 📊 **Live graphs** — consensus trend, YES/NO split, per-agent breakdown, donut chart
-- 💾 **Auto-save** — markets and full debate logs saved as JSON
-- 💬 **Post-debate chat** — interrogate any of the 10 AIs about why they voted the way they did
+Each agent has a defined personality, a bias score (which mathematically influences both their initial vote and how hard they resist changing their mind), and a growing track record of past predictions. After all 3 rounds, a **Meta-Agent Judge** reviews every agent's reasoning independently and produces a final verdict — which can override the panel majority if the minority made the better case.
 
-All powered by **Groq's free API** running **Llama 3.3 70B**. No credit card. No paid subscription.
+**Vibe coded** — built entirely through conversation with [Claude](https://claude.ai). No IDE, no Stack Overflow, just describing what we wanted and iterating in real time.
 
 ---
 
-## Demo
+## What's new in v2
 
-```
-  🔴  DEBATE OPENED
-  Will Bitcoin exceed $120k in 2026?
-  Market  YES 44.0%  ·  NO 56.0%  ·  Vol $3,800,000
-
-  ── ROUND 1/3  [llama-3.3-70b-versatile] ──
-
-  AXIOM-1    [YES]  Historical BTC cycles suggest a new ATH is overdue; the 4-year
-                    halving pattern strongly supports a push past $120k.
-  VERA-2     [ NO]  The market has already priced in the halving — smart money
-                    exited months ago. This rally is retail FOMO, not fundamentals.
-  NEXUS-3    [YES]  Updating on AXIOM's cycle data: prior probability shifts to ~60%.
-                    Insufficient evidence to override the base rate here.
-  KIRA-4     [ NO]  Institutional custody narratives are manufactured hype. Actual
-                    on-chain accumulation data doesn't support the bull case.
-  ...
-
-  ── ROUND 2/3 ──
-  ...
-
-  ⚡  FINAL VERDICT: NO  (13 YES · 17 NO · 57% confidence)
-```
-
----
-
-## Features
-
-| Feature | Details |
-|---|---|
-| 🤖 **10 AI agents** | Each has a unique personality — contrarian, Bayesian, statistician, philosopher, etc. |
-| 🔗 **URL paste** | Paste any `polymarket.com/event/...` URL — auto-extracts the slug, fetches live data |
-| 🔥 **Trending markets** | Live fetch of top markets by volume directly from Polymarket's API |
-| 💾 **Save / Load** | Markets saved as JSON in `polyarena_saves/`. Debates saved with full logs. |
-| 📊 **Graphs** | 4-panel matplotlib chart: consensus trend, YES/NO share, per-agent bars, donut pie |
-| 💬 **Post-debate chat** | Multi-turn chat with any agent. Broadcast questions to all 10 at once. |
-| 🔄 **Model fallback** | Auto-falls back across 4 Groq models if you hit a rate limit |
-| 🎨 **Colorful terminal** | Full ANSI colors, animated spinner, ASCII banner |
+| Feature | v1 | v2 |
+|---|---|---|
+| Agent output format | Plain text | Structured JSON with `vote`, `confidence`, `reasoning`, `critique` |
+| Debate rounds | 3 rounds, simple | R1 independent · R2 reactive · R3 final refinement |
+| Agent memory | Per-debate context only | Full round history + confidence trajectory |
+| Bias mechanics | Cosmetic label | Mathematically affects vote tendency + flip resistance |
+| Decision engine | Vote count | Weighted aggregation (`confidence × weight`) |
+| Disagreement score | None | Variance of signed confidence values |
+| Meta-Agent Judge | None | JUDGE-PRIME reviews all reasoning, can override majority |
+| Track record | None | Persistent per-agent accuracy, dynamically updates weights |
+| Graphs | 4 panels | 8 panels including **disagreement heatmap** + confidence trajectories |
+| Human intervention | None | Inject statements mid-debate between rounds |
+| Post-debate chat | Yes | + Judge Q&A, roster with confidence/weight display |
+| Code architecture | Single file | 8 clean modules with documented classes |
 
 ---
 
@@ -77,30 +52,22 @@ All powered by **Groq's free API** running **Llama 3.3 70B**. No credit card. No
 
 ### 1. Get a free Groq API key
 
-Go to **[console.groq.com](https://console.groq.com)** → sign up → API Keys → Create key.
-
-No credit card required. Free tier gives you plenty of requests for dozens of debates per day.
+Go to **[console.groq.com](https://console.groq.com)** → sign up → API Keys → Create.  
+Free tier. No credit card.
 
 ### 2. Clone and install
 
 ```bash
-git clone https://github.com/patriq128/Poly_Arena.git
-cd Poly_Arena
+git clone https://github.com/yourusername/polyarena.git
+cd polyarena
 pip install -r requirements.txt
 ```
 
-### 3. Set your API key
+### 3. Set your key and run
 
 ```bash
 export GROQ_API_KEY=gsk_your_key_here
-```
-
-To make it permanent, add that line to your `~/.bashrc` or `~/.zshrc`.
-
-### 4. Run it
-
-```bash
-python3 polyarena.py
+python3 main.py
 ```
 
 ---
@@ -115,8 +82,6 @@ colorama>=0.4.6
 numpy>=1.21.0
 ```
 
-Install all at once:
-
 ```bash
 pip install groq requests matplotlib colorama numpy
 ```
@@ -125,226 +90,314 @@ Python **3.8+** required.
 
 ---
 
-## How it works
-
-### The debate engine
-
-Each debate runs **3 rounds × 10 agents = 30 AI calls** total.
-
-Before each vote, an agent receives:
-- The market question and live Polymarket YES/NO price
-- The current running vote tally
-- The last 8 messages from the debate transcript
-
-This means agents genuinely **read and respond to each other** — VERA-2 will push back on AXIOM-1's argument, LYRA-8 will stress-test whatever position is winning.
-
-Each agent responds with structured JSON:
-```json
-{"vote": "YES", "reason": "1-2 sentence reasoning citing previous arguments"}
-```
-
-### The AI agents
-
-All 10 agents run on **Llama 3.3 70B via Groq** but with different system prompts shaping their reasoning style:
-
-| Agent | Personality |
-|---|---|
-| **AXIOM-1** | Rational analyst — base rates, historical data, hard statistics |
-| **VERA-2** | Contrarian — assumes crowds are systematically wrong |
-| **NEXUS-3** | Bayesian — thinks in likelihood ratios, updates incrementally |
-| **KIRA-4** | Skeptic — doubts narratives, looks for hidden incentives |
-| **ORION-5** | Momentum trader — follows trends and smart money |
-| **ECHO-6** | Balanced synthesizer — weighs both sides carefully |
-| **DANTE-7** | Fundamentalist — ignores noise, focuses on structural forces |
-| **LYRA-8** | Devil's advocate — argues the unpopular side |
-| **SIGMA-9** | Statistician — only trusts quantifiable evidence |
-| **ZETA-10** | Philosopher — questions the framing of the question itself |
-
-### The consensus signal
-
-After each vote, PolyArena computes a **blended consensus price**:
-
-```
-consensus = market_price × 0.65 + (ai_yes_votes / total_votes) × 0.35
-```
-
-This shows you whether the AI collective is more bullish or bearish than the live Polymarket price — tracked in real time on the graph.
-
-### Polymarket integration
-
-PolyArena uses Polymarket's public **Gamma API** (no auth required):
-
-```
-https://gamma-api.polymarket.com/markets?slug={slug}
-https://gamma-api.polymarket.com/markets?closed=false&limit=20&order=volume
-```
-
-It auto-extracts the slug from any Polymarket URL format:
-- `https://polymarket.com/event/will-bitcoin-hit-100k`
-- `https://polymarket.com/market/will-bitcoin-hit-100k`
-- `will-bitcoin-hit-100k` (bare slug also works)
-
----
-
-## File structure
+## Project structure
 
 ```
 polyarena/
-├── polyarena.py          # Main script — everything in one file
-├── requirements.txt      # Python dependencies
-├── README.md             # This file
-├── LICENSE               # MIT
-├── polyarena_saves/      # Auto-created — saved markets & debates
-│   ├── {market_id}.json          # Saved market data
-│   └── debate_{id}_{ts}.json     # Full debate logs
-└── polyarena_graphs/     # Auto-created — generated PNG charts
-    └── debate_{id}_{ts}.png
+├── main.py              # Terminal UI + menu system (entry point)
+├── agents.py            # Agent class, AgentResponse dataclass, agent registry
+├── debate_manager.py    # 3-round debate orchestration, human intervention
+├── decision_engine.py   # Weighted aggregation + Meta-Agent Judge
+├── track_record.py      # Persistent accuracy tracking, leaderboard
+├── graphs.py            # 8-panel matplotlib chart generation
+├── polymarket.py        # Polymarket API, URL parsing, save/load
+├── post_debate_chat.py  # Post-debate interactive chat (agents + judge)
+├── requirements.txt
+├── LICENSE
+├── README.md
+├── polyarena_saves/     # Auto-created — markets, debates, track record
+└── polyarena_graphs/    # Auto-created — generated PNG charts
 ```
 
 ---
 
-## Saved data format
+## Architecture deep dive
 
-### Market JSON (`polyarena_saves/{id}.json`)
+### Agent class (`agents.py`)
+
+```python
+class Agent:
+    name:        str
+    personality: str
+    bias:        float      # 0.0 (strong NO) → 1.0 (strong YES)
+    own_history: list       # this agent's past responses this debate
+    debate_context: list    # all agents' outputs (shared)
+    accuracy:    float      # updated from track record
+    weight:      float      # dynamic = accuracy × (0.7 + 0.3 × bias)
+```
+
+**Bias mechanics:**
+- Acts as a Bayesian prior on the initial vote tendency
+- High-bias agents need stronger contrary evidence to flip
+- When an agent changes their vote, confidence is penalised proportionally to `abs(bias - 0.5) × 0.4`
+
+**Structured output (`AgentResponse`):**
 ```json
 {
-  "id": "507583",
-  "slug": "will-bitcoin-exceed-120k-in-2026",
-  "question": "Will Bitcoin exceed $120k in 2026?",
-  "yes_price": 0.44,
-  "no_price": 0.56,
-  "volume": 3800000.0,
-  "url": "https://polymarket.com/event/will-bitcoin-exceed-120k-in-2026",
-  "fetched_at": "2026-04-05T14:23:11.042"
+  "vote":       "YES",
+  "confidence": 0.74,
+  "reasoning":  "Historical halving cycles strongly support a new ATH...",
+  "critique":   "VERA-2 assumes market efficiency but ignores retail FOMO effects..."
 }
 ```
 
-### Debate JSON (`polyarena_saves/debate_{id}_{ts}.json`)
+Every agent must name another agent by name in their critique. In rounds 2 and 3, they explicitly respond to what others said.
+
+---
+
+### Debate Manager (`debate_manager.py`)
+
+Runs the structured 3-round debate:
+
+| Round | Name | What happens |
+|---|---|---|
+| 1 | Independent | Each agent gives initial opinion without seeing others |
+| 2 | Reactive | Each agent sees all Round-1 outputs, updates + critiques |
+| 3 | Final | Each agent sees Round-2 outputs, locks in final position |
+
+After each round, all responses are broadcast to all agents' `debate_context`.
+
+**Human intervention** — if enabled, a prompt appears between rounds letting you inject a statement. It's added to every agent's context as a `HUMAN` entry before the next round begins.
+
+**Model fallback** — if Groq rate-limits or a model fails, automatically falls back:
+```
+llama-3.3-70b-versatile → llama-3.1-70b-versatile → mixtral-8x7b-32768 → llama3-70b-8192
+```
+
+---
+
+### Decision Engine (`decision_engine.py`)
+
+#### Weighted aggregation
+
+Takes each agent's **final round** response and computes:
+
+```python
+weighted_yes = sum(confidence × weight  for YES voters)
+weighted_no  = sum(confidence × weight  for NO  voters)
+final        = "YES" if weighted_yes >= weighted_no else "NO"
+confidence   = max(weighted_yes, weighted_no) / (weighted_yes + weighted_no)
+```
+
+Where `weight = accuracy × (0.7 + 0.3 × bias)` — agents with better track records get more say.
+
+#### Disagreement score
+
+```python
+# +confidence for YES voters, -confidence for NO voters
+signed = [+conf if vote=="YES" else -conf for each agent]
+disagreement = min(1.0, np.var(signed) × 2)
+```
+
+- `0.0` = perfect consensus (everyone voted the same with equal confidence)
+- `1.0` = maximum disagreement (agents strongly split, high confidence on both sides)
+
+#### Meta-Agent Judge
+
+JUDGE-PRIME receives the full debate transcript and the panel's preliminary decision, then produces an independent verdict:
+
 ```json
 {
-  "market": { ... },
-  "votes": { "yes": 13, "no": 17 },
-  "chart_data": [
-    { "step": "Start", "yes_pct": 0, "no_pct": 0, "consensus": 44.0 },
-    { "step": "R1·AXIOM", "yes_pct": 100, "no_pct": 0, "consensus": 63.6 },
-    ...
-  ],
-  "debate_log": [
-    {
-      "round": 1,
-      "agent": "AXIOM-1",
-      "vote": "YES",
-      "reason": "Historical BTC cycles suggest...",
-      "running_yes": 1,
-      "running_no": 0
-    },
-    ...
-  ],
-  "saved_at": "2026-04-05T14:31:44.812"
+  "verdict":         "NO",
+  "reasoning":       "While AXIOM-1 and DANTE-7 made compelling cyclical arguments...",
+  "strongest_agent": "VERA-2",
+  "weakest_agent":   "ORION-5"
 }
 ```
 
----
-
-## Menu walkthrough
-
-```
-MAIN MENU
-─────────────────────────────────────────────────────────────────────────────────
-  [1]  🔗  Paste Polymarket URL  →  auto-fetch ID, data & save
-  [2]  🔥  Browse live trending markets
-  [3]  📁  My saved markets  →  start a debate
-  [4]  📊  Past debate results  →  view graphs
-  [5]  🤖  Agent roster
-  [q]  Exit
-```
-
-**Option 1 — URL paste:** Paste any Polymarket URL. The app extracts the slug, hits the API, shows you the market data (question, ID, slug, YES/NO prices, volume), and lets you save it and/or debate it immediately.
-
-**Option 2 — Trending:** Fetches the top 8 markets by volume live from Polymarket. Pick one to save or debate.
-
-**Option 3 — Saved markets:** Browse your saved markets, pick one to debate, or delete ones you no longer need.
-
-**Option 4 — Past debates:** View a list of all past debate results with their verdicts and timestamps. Pick one to regenerate its graph.
-
-**Option 5 — Roster:** See all 10 agents and their personalities.
+The Judge is explicitly instructed it is **not obligated to follow the majority** and should override if the minority made a better case.
 
 ---
 
-## Post-debate chat
+### Track Record (`track_record.py`)
 
-After every debate you can open a chat session with the AIs:
+Stores predictions in `polyarena_saves/track_record.json`:
+
+```json
+{
+  "AXIOM-1": {
+    "predictions": 12,
+    "correct":      8,
+    "accuracy":  0.667,
+    "history": [
+      {
+        "question":   "Will BTC hit $100k?",
+        "market_id":  "abc123",
+        "predicted":  "YES",
+        "confidence": 0.72,
+        "resolved":   "YES",
+        "correct":    true,
+        "timestamp":  "2026-01-15T10:30:00"
+      }
+    ]
+  }
+}
+```
+
+**Workflow:**
+1. After each debate: `tracker.record_predictions()` logs predictions (unresolved)
+2. When a market resolves: `tracker.resolve_market(market_id, "YES"/"NO")`
+3. Accuracy recalculates, agent weights update automatically
+4. Use the leaderboard view (`[5]` in main menu) to see standings
+
+---
+
+### Graphs (`graphs.py`)
+
+8-panel chart saved to `polyarena_graphs/` and auto-opened:
+
+| Panel | Chart | What it shows |
+|---|---|---|
+| 1 | AI Consensus Trend | YES% consensus over all 30 steps vs market price |
+| 2 | Vote Share | Cumulative YES vs NO as debate progressed |
+| 3 | Avg Confidence per Round | Panel mean ± std dev across R1/R2/R3 |
+| 4 | Agent Confidence Trajectories | One line per agent across 3 rounds |
+| 5 | **Disagreement Heatmap** | Agents × rounds · green=YES · red=NO · intensity=confidence |
+| 6 | Per-Agent Final Vote | Stacked bars showing each agent's final vote + confidence |
+| 7 | Final Split | Donut chart with judge verdict in center |
+| 8 | Weighted Breakdown | Horizontal bars: weighted YES, weighted NO, disagreement score |
+
+The **disagreement heatmap** is the most information-dense panel — it shows at a glance which agents flipped between rounds, who was certain vs uncertain, and where the main fault lines of disagreement were.
+
+---
+
+### Post-Debate Chat (`post_debate_chat.py`)
+
+After every debate, open a Q&A session:
 
 ```
   💬  POST-DEBATE CHAT
   Commands:
     1-10 / name  → private multi-turn chat with that agent
-    all          → broadcast your question to all 10 agents at once
-    roster       → show agents and their round-by-round votes
+    all          → broadcast question to all 10 agents at once
+    judge        → Q&A with JUDGE-PRIME
+    roster       → agent votes + confidence + weights
     q            → back to menu
 ```
 
-**Private chat** — full multi-turn conversation with one agent. They remember the entire debate and their own votes. You can challenge their reasoning and they'll push back (or change their mind if you make a good argument).
-
-**Panel mode** (`all`) — ask one question and get a response from all 10 agents in sequence. Great for seeing how differently they interpret the same follow-up question.
+Each agent's chat uses their full debate transcript, own vote history, and the judge's verdict as context. They can change their mind if you make a compelling argument — their personality and bias shape how likely that is.
 
 ---
 
-## Graphs
+## The 10 agents
 
-After every debate, a PNG is saved to `polyarena_graphs/` and auto-opened. The 4-panel chart includes:
+| Agent | Bias | Personality |
+|---|---|---|
+| **AXIOM-1** | 0.70 | Rational analyst — base rates, data, no vibes |
+| **VERA-2** | 0.30 | Contrarian — hunts for mispricing, distrusts consensus |
+| **NEXUS-3** | 0.55 | Bayesian — explicit likelihood ratios, shows working |
+| **KIRA-4** | 0.40 | Skeptic — doubts narratives, looks for hidden incentives |
+| **ORION-5** | 0.65 | Momentum trader — follows trends and smart money |
+| **ECHO-6** | 0.50 | Balanced synthesizer — steelmans both sides |
+| **DANTE-7** | 0.75 | Fundamentalist — ignores noise, structural forces only |
+| **LYRA-8** | 0.25 | Devil's advocate — stress-tests majority positions |
+| **SIGMA-9** | 0.60 | Statistician — quantifiable evidence only |
+| **ZETA-10** | 0.45 | Philosopher — questions the question itself |
 
-1. **AI Consensus YES% over Time** — area chart tracking how the AI signal moved across all 30 votes, with a dashed line showing the live market price
-2. **Cumulative YES vs NO Vote Share** — dual area chart showing the running vote split as the debate progressed
-3. **Per-Agent Vote Breakdown** — stacked bar chart showing how many YES/NO votes each agent cast across all 3 rounds
-4. **Final Split** — donut chart with the final YES/NO percentages and the winning verdict in the center
+All 10 run on **Llama 3.3 70B via Groq**. Each has a different system prompt. Their dynamic weight starts at `accuracy=0.5` and shifts as they build a track record.
 
 ---
 
-## Groq model fallback
-
-If you hit a rate limit, PolyArena automatically tries the next model:
+## Example output
 
 ```
-llama-3.3-70b-versatile   ← primary (best)
-llama-3.1-70b-versatile   ← fallback 1
-mixtral-8x7b-32768        ← fallback 2
-llama3-70b-8192           ← fallback 3
+  🔴  DEBATE OPENED
+  Will Bitcoin exceed $120k in 2026?
+  Market  YES 44.0%  ·  NO 56.0%  ·  Vol $3,800,000
+
+  ── ROUND 1/3 · INDEPENDENT OPINIONS ──
+
+  AXIOM-1    [YES] conf=0.71 [███████░░░]
+  ↳ Historical BTC halving cycles show consistent 12-18 month post-halving ATH.
+    The 2024 halving puts us squarely in the breakout window.
+  ✦ VERA-2 would argue markets have priced this in — but halving scarcity is
+    structurally underweighted by futures traders.
+
+  VERA-2     [ NO] conf=0.68 [██████░░░░]
+  ↳ Smart money exited Q4 2025. Retail FOMO is not a sustainable price driver
+    and ETF inflows have plateaued.
+  ✦ AXIOM-1's cycle thesis ignores the macro environment — rate cuts are delayed
+    and credit is tighter than in previous cycles.
+
+  ...
+
+  ── DECISION ENGINE COMPUTING... ──
+  Weighted YES: 3.241  |  Weighted NO: 4.187
+  Raw votes:    13 YES  /  17 NO
+  Disagreement score: 0.312 (MODERATE)
+
+  ── META-AGENT JUDGE DELIBERATING... ──
+  JUDGE VERDICT: NO
+  VERA-2 and KIRA-4 presented the structurally strongest case...
+  Strongest argument: VERA-2
+  Weakest  argument: ORION-5
+
+  ⚡  FINAL DECISION: NO   confidence=0.564   disagreement=0.312
+  ▼ AI MORE BEARISH THAN MARKET
 ```
 
 ---
 
 ## Contributing
 
-Pull requests welcome. Some ideas if you want to contribute:
+Pull requests welcome. Ideas:
 
-- **More agents** — add agents with different personas (macro trader, political analyst, sports bettor)
-- **More markets** — support Kalshi, Manifold, or other prediction market APIs
-- **Web UI** — a Flask/FastAPI version with a proper frontend
-- **Persistent agent memory** — agents remember past debates on the same market
-- **Multi-market correlation** — debate whether two related markets are mispriced relative to each other
-- **Export** — export debate transcripts to PDF or markdown
-- **Discord bot** — run debates triggered by Discord commands
+- **More markets** — Kalshi, Manifold, PredictIt API integration
+- **Agent evolution** — personalities that shift over time based on what worked
+- **Async debates** — run all 10 agents in parallel per round (much faster)
+- **Web UI** — Flask/FastAPI + React frontend
+- **Discord bot** — trigger debates via slash commands
+- **Export** — PDF debate transcripts, CSV track records
+- **Custom agents** — CLI to define new agent personalities and add them to the panel
 
 To contribute:
-1. Fork the repo
-2. Create a branch (`git checkout -b feature/my-feature`)
-3. Commit your changes
-4. Open a pull request
+```bash
+git clone https://github.com/yourusername/polyarena.git
+cd polyarena
+git checkout -b feature/my-feature
+# make changes
+git commit -m "add: description of change"
+git push origin feature/my-feature
+# open pull request
+```
 
 ---
 
 ## About
 
-This project was **vibe coded**
+PolyArena v2 was **vibe coded** — the entire codebase was built through conversation with [Claude](https://claude.ai) (Anthropic's AI). The architecture — agent classes, structured outputs, weighted decision engine, meta-agent judge, disagreement heatmaps — was all designed and implemented through natural language dialogue, not a traditional development session.
 
-The result is a fully working terminal app with a Groq AI backend, live Polymarket API integration, matplotlib graphs, JSON persistence, and a multi-turn post-debate chat system — all in a single Python file.
+If this is the kind of thing you want to build, [Claude.ai](https://claude.ai) is where to start.
 
 ---
 
+## License
+
+MIT — do whatever you want with it.
+
+```
+MIT License — Copyright (c) 2026 PolyArena Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+```
+
+---
 
 ## Links
 
 - 🤖 [Groq Console](https://console.groq.com) — free API key
 - 📈 [Polymarket](https://polymarket.com) — prediction markets
-- 🦙 [Llama 3.3 70B](https://ai.meta.com/blog/llama-3/) — the model powering all 10 agents
+- 💜 [Claude](https://claude.ai) — vibe coding partner
+- 🦙 [Llama 3.3 70B](https://ai.meta.com/blog/llama-3/) — powers all agents
