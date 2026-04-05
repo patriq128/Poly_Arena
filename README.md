@@ -84,8 +84,8 @@ No credit card required. Free tier gives you plenty of requests for dozens of de
 ### 2. Clone and install
 
 ```bash
-git clone https://github.com/yourusername/polyarena.git
-cd polyarena
+git clone https://github.com/patriq128/Poly_Arena.git
+cd Poly_Arena
 pip install -r requirements.txt
 ```
 
