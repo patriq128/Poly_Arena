@@ -1,6 +1,6 @@
 # POLY ARENA
 
-> **Vibe coded with Claude.** 10 AIs debate Polymarket prediction markets in your terminal — live graphs, save/load, and post-debate chat included.
+> 10 AIs debate Polymarket prediction markets in your terminal — live graphs, save/load, and post-debate chat included.
 
 ```
   ██████╗  ██████╗ ██╗  ██╗   ██╗     █████╗ ██████╗ ███████╗███╗   ██╗ █████╗
