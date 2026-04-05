@@ -1,6 +1,6 @@
-# POLY⚡ARENA v2
+# POLY ARENA 
 
-> **Vibe coded with Claude.** An advanced multi-agent AI debate system for Polymarket prediction markets — structured outputs, meta-agent judge, disagreement heatmap, track record system, and post-debate chat. Powered by Groq (free).
+> An advanced multi-agent AI debate system for Polymarket prediction markets — structured outputs, meta-agent judge, disagreement heatmap, track record system, and post-debate chat. Powered by Groq (free).
 
 ```
   ██████╗  ██████╗ ██╗  ██╗   ██╗     █████╗ ██████╗ ███████╗███╗   ██╗ █████╗
@@ -15,17 +15,16 @@
 [![Groq](https://img.shields.io/badge/AI-Groq%20%2B%20Llama%203.3%2070B-orange)](https://console.groq.com)
 [![Polymarket](https://img.shields.io/badge/Data-Polymarket%20API-purple)](https://polymarket.com)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Vibe Coded](https://img.shields.io/badge/vibe%20coded-with%20Claude-00ff88)](https://claude.ai)
 
 ---
 
 ## What is this?
 
-PolyArena v2 is a fully modular multi-agent debate system that pits **10 AI agents** against each other in structured, 3-round debates about [Polymarket](https://polymarket.com) prediction markets.
+PolyArena is a fully modular multi-agent debate system that pits **10 AI agents** against each other in structured, 3-round debates about [Polymarket](https://polymarket.com) prediction markets.
 
 Each agent has a defined personality, a bias score (which mathematically influences both their initial vote and how hard they resist changing their mind), and a growing track record of past predictions. After all 3 rounds, a **Meta-Agent Judge** reviews every agent's reasoning independently and produces a final verdict — which can override the panel majority if the minority made the better case.
 
-**Vibe coded** — built entirely through conversation with [Claude](https://claude.ai). No IDE, no Stack Overflow, just describing what we wanted and iterating in real time.
+**Vibe coded**
 
 ---
 
@@ -58,8 +57,8 @@ Free tier. No credit card.
 ### 2. Clone and install
 
 ```bash
-git clone https://github.com/yourusername/polyarena.git
-cd polyarena
+git clone https://github.com/patriq128/Poly_Arena.git
+cd Poly_Arena
 pip install -r requirements.txt
 ```
 
@@ -363,41 +362,8 @@ git push origin feature/my-feature
 
 ---
 
-## About
-
-PolyArena v2 was **vibe coded** — the entire codebase was built through conversation with [Claude](https://claude.ai) (Anthropic's AI). The architecture — agent classes, structured outputs, weighted decision engine, meta-agent judge, disagreement heatmaps — was all designed and implemented through natural language dialogue, not a traditional development session.
-
-If this is the kind of thing you want to build, [Claude.ai](https://claude.ai) is where to start.
-
----
-
-## License
-
-MIT — do whatever you want with it.
-
-```
-MIT License — Copyright (c) 2026 PolyArena Contributors
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-```
-
----
-
 ## Links
 
 - 🤖 [Groq Console](https://console.groq.com) — free API key
 - 📈 [Polymarket](https://polymarket.com) — prediction markets
-- 💜 [Claude](https://claude.ai) — vibe coding partner
 - 🦙 [Llama 3.3 70B](https://ai.meta.com/blog/llama-3/) — powers all agents
